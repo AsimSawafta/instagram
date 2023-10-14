@@ -1,0 +1,26 @@
+.or{
+    position: relative;
+    margin: 18px 0;
+    color: #959595;
+   margin: 0;
+   margin-top: 10px;
+}
+.or::before{
+content: "";
+position: absolute;
+width: 154px;
+height: 0.5px;
+background-color: #2c2c2c;
+right:120%;
+top: 58%;
+}
+.or::after{
+    content: "";
+    position: absolute;
+    width: 154px;
+    height: 0.5px;
+    background-color: #2c2c2c;
+    left:120%;
+    top: 58%;
+    }
+  

@@ -1,0 +1,21 @@
+
+.image-container {
+    position: relative;
+  }
+  
+  .hover-div {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    
+    z-index: 4;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+  }
+  
+  .image-container:hover .hover-div {
+    visibility: visible;
+    opacity: 1;
+  }
+  
