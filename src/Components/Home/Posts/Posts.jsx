@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import Post from './Post'
 import { Container } from '@mui/material'
 import axios from 'axios'
@@ -11,6 +11,7 @@ export default function Posts() {
   const { homePosts: posts, setHomePosts: setPosts } = useContext(postsContext)
 
 
+
   function getPosts() {
     axios.get("http://16.170.173.197/posts", {
       headers: {
@@ -18,11 +19,15 @@ export default function Posts() {
       },
     }).then((response) => {
       setPosts(response.data.posts);
+     
+      
     }).catch((error) => {
       console.error(error)
     })
 
   }
+
+
 
 
   useEffect(() => {
@@ -37,7 +42,7 @@ export default function Posts() {
 
         {
 
-          posts ? [...posts].reverse().map((posts, index) => <Post key={index} id={posts.id} name={posts.user.userName} body={posts.description} urlPhoto={posts.image} likes={posts.likes} />
+          posts ? [...posts].reverse().map((posts, index) => <Post key={index} id={posts.id} name={posts.user.userName} body={posts.description} urlPhoto={posts.image} likes={posts.likes}  />
           ) : ""
         }
         <Modal data={setPosts} />

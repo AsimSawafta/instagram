@@ -10,10 +10,12 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MenuIcon from "@mui/icons-material/Menu";
 import instaImage from "../../assets/instagram-logo.png";
 import { Avatar, Button, Fade, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Menu, MenuItem } from "@mui/material";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Modal from '../Modal/Modal'
 import img from '../../assets/WhatsApp Image 2023-10-06 at 12.46.31_5690597c.jpg'
 import axios from "axios";
+import Swal from "sweetalert2";
+
 export default function IconsSide() {
 
 
@@ -29,18 +31,79 @@ export default function IconsSide() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+const n=useNavigate()
   const handleCloseoFLogout = () => {
     setAnchorEl(null);
     localStorage.removeItem("token")
     localStorage.removeItem("myID")
     localStorage.removeItem("name")
+    n('/')
+
   };
 
 
+function sweetAlert1(){
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+  
+  swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteAccount()
+      swalWithBootstrapButtons.fire(
+        'Deleted!',
+        'Your Account has been deleted.',
+        'success'
+      )
+      n('/')
+    } else if (
+    
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary Account is safe :)',
+        'error'
+      )
+    }
+  })}
+
+ 
+function sweetAlert(){
 
 
-
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Deleted!',
+        'Your Account has been deleted.',
+        'success'
+      )
+      deleteAccount()
+      n('/')
+    }
+  })
+}
 
   /*..........................*/
   const [openModal, setOpen] = React.useState(false);
@@ -53,31 +116,32 @@ export default function IconsSide() {
   console.log(openModal)
   /////************************/////// */
 
-  const data = localStorage.getItem("myID")
+
   async function deleteAccount() {
-    // await axios.delete(`http://16.170.173.197/users`,
-    //   { 'id': `${data}` },
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     }
-    //   },
-
-
-    // ).then((response) => {
-    //   console.log(response);
-
-    // })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-
-    // handleCloseoFLogout()
-
-    console.log("مش زابط");
-
+    try {
+      const name = localStorage.getItem('name');
+  
+      if (!name) {
+        console.log('Token is missing or invalid.');
+        return;
+      }
+  
+      const response = await axios.delete('http://16.170.173.197/users', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAnchorEl(null);
+      localStorage.removeItem("token")
+      localStorage.removeItem("myID")
+      localStorage.removeItem("name")
+      console.log(response);
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
-
+  
 
 
   return (
@@ -179,11 +243,10 @@ export default function IconsSide() {
             w
           />
 
-          <ListItemText primary="Asim sawafta" />
+          <ListItemText primary={localStorage.getItem("name")} />
 
         </ListItemButton>
       </Link>
-
       <ListItemButton
         style={{ position: "absolute", bottom: "10px", color: "white" }}>
         <div>
@@ -212,7 +275,7 @@ export default function IconsSide() {
             }}
           >
             <MenuItem onClick={handleCloseoFLogout}><Link style={{ textDecoration: 'none', color: "black" }} to={'/'}>Logout</Link></MenuItem>
-            <MenuItem onClick={deleteAccount}><Link style={{ textDecoration: 'none', color: "black" }}>deleteAccount</Link></MenuItem>
+            <MenuItem onClick={sweetAlert} ><Link style={{ textDecoration: 'none', color: "black" }}>deleteAccount</Link></MenuItem>
           </Menu>
         </div>
       </ListItemButton>

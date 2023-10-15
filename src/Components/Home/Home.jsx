@@ -19,7 +19,7 @@ export default function Home() {
   return (
     
       
-      //width
+      
         <Box  sx={{bgcolor:"black" , marginLeft:"20px" , width:"100%"}}>
         <Grid container rowSpacing={0} columnSpacing={0}>
         <Grid item xs={7}>

@@ -9,10 +9,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from './Components/SignUp/SignUp';
 import SignIn from './Components/SignIn/SignIn';
 import Layout2 from './Components/Layout2/Layout2';
-import LoginAndRegisert from './Components/LoginAndRegisert/LoginAndRegisert';
+
 import ProtectedRouter from './Components/ProtectedRouter/ProtectedRouter';
 import { postsContext } from './Components/PostsContext/PostsContext';
 import { useState } from 'react';
+import PageNoteFound from './Components/PageNotFound/PageNoteFound';
 
 // import Modal from '../src/Components/Modal/Modal.jsx'
 function App() {
@@ -26,8 +27,8 @@ function App() {
       element: <Layout2 />,
       children: [
         { index: true, element: <SignIn /> },
-        { path: "signUp", element: <SignUp /> }
-
+        { path: "signUp", element: <SignUp /> },
+       
       ]
     },
 
@@ -40,7 +41,7 @@ function App() {
         { path: "Profile", element: <ProtectedRouter><Profile /></ProtectedRouter> },
         { path: "Messages", element: <ProtectedRouter><Messages /></ProtectedRouter> },
         { path: "Explore", element: <ProtectedRouter><Explore /></ProtectedRouter> },
-        { path: "*", element: <h3>'page not found'</h3> },
+        { path: "*", element: <PageNoteFound/> },
       ],
     },
   ])

@@ -1,11 +1,11 @@
 import React from 'react'
-import Icons from '../IconsPage/Icons'
+import Sidebar from '../Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
 
 export default function Layout() {
   return (
     <>
-        <Icons/>
+        <Sidebar/>
         <Outlet></Outlet>
         
     </>
