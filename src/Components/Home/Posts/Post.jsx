@@ -7,7 +7,6 @@ import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import saleswoman from '../../../assets/StoriesAvatars/saleswoman.png'
@@ -19,14 +18,51 @@ import axios from 'axios';
 import { postsContext } from '../../PostsContext/PostsContext';
 
 export default function RecipeReviewCard({ id, name, body, urlPhoto, likes}) {
-  const [likesUsers,setLikesUsers]=useState([])
+  
   const token = localStorage.getItem("token")
 
   const { setHomePosts, setPosts } = useContext(postsContext)
   const [count ,setCount]=useState(0)
   
   
-  
+  const fetchData=() =>{
+
+axios.get("http://16.170.173.197/posts",{
+  headers: {
+    Authorization:`Bearer ${token}`
+  },
+}).then((response) =>{
+  const posts = response.data.posts;
+ 
+  setHomePosts(posts)
+
+
+})
+.catch((error) =>{
+  console.error(error)
+})
+  }
+
+  async function AddRemoveLike(){
+    await axios.post(`http://16.170.173.197/posts/like/${id}`,null,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(() =>fetchData())
+    .then((res) =>{
+
+      const posts = res.data.posts;
+        const myId = localStorage.getItem('myID')
+        const myPosts = posts.filter(post => post.user.id === myId)
+        setHomePosts(posts)
+        setPosts(myPosts)
+        
+
+    }).catch((error) => {
+            console.log(error)
+          })
+  }
   
   async function like1() {
     await axios.post(`http://16.170.173.197/posts/like/${id}`, null, {
@@ -40,21 +76,21 @@ export default function RecipeReviewCard({ id, name, body, urlPhoto, likes}) {
     })
     )
       .then((res) => {
-        nameLikes();
+        
         const posts = res.data.posts;
         const myId = localStorage.getItem('myID')
         const myPosts = posts.filter(post => post.user.id === myId)
         setHomePosts(posts)
         setPosts(myPosts)
-        
+        nameLikes();
       }).catch((error) => {
         console.error(error)
       })
   }
   
-
-
+const [likesUsers,setLikesUsers]=useState([])
 function nameLikes() {
+ 
     axios
       .get(`http://16.170.173.197/posts/likes/${id}`, {
         headers: {
@@ -66,7 +102,7 @@ function nameLikes() {
         setCount(response.data.likes.count);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(1);
       });
   }
   
@@ -115,7 +151,7 @@ useEffect(() => {
         <CardActions style={{ display: "flex", justifyContent: "space-between" }} disableSpacing>
           <div style={{ margin: 0, padding: 0 }}>
             <IconButton aria-label="add to favorites">
-              <FavoriteIcon sx={{ color: likes.includes(localStorage.getItem("myID")) ? "red" : "white" }}  onClick={() => {like1();}} />
+              <FavoriteIcon sx={{ color: likes.includes(localStorage.getItem("myID")) ? "red" : "white" }}  onClick={() => like1()} />
             </IconButton>
             <IconButton >
               <ModeCommentOutlinedIcon sx={{ color: "white" }} />

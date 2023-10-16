@@ -15,7 +15,7 @@ import { postsContext } from './Components/PostsContext/PostsContext';
 import { useState } from 'react';
 import PageNoteFound from './Components/PageNotFound/PageNoteFound';
 
-// import Modal from '../src/Components/Modal/Modal.jsx'
+
 function App() {
   const [posts, setPosts] = useState([])
   const [homePosts, setHomePosts] = useState([])
