@@ -42,43 +42,6 @@ const n=useNavigate()
   };
 
 
-function sweetAlert1(){
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: false
-  })
-  
-  swalWithBootstrapButtons.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'No, cancel!',
-    reverseButtons: true
-  }).then((result) => {
-    if (result.isConfirmed) {
-      deleteAccount()
-      swalWithBootstrapButtons.fire(
-        'Deleted!',
-        'Your Account has been deleted.',
-        'success'
-      )
-      n('/')
-    } else if (
-    
-      result.dismiss === Swal.DismissReason.cancel
-    ) {
-      swalWithBootstrapButtons.fire(
-        'Cancelled',
-        'Your imaginary Account is safe :)',
-        'error'
-      )
-    }
-  })}
 
  
 function sweetAlert(){
@@ -113,7 +76,7 @@ function sweetAlert(){
   const closeModal = () => {
     setOpen(false)
   }
-  console.log(openModal)
+
   /////************************/////// */
 
 

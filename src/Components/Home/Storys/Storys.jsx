@@ -1,11 +1,7 @@
 
 import Stack from '@mui/material/Stack';
 import driver from '../../../assets/StoriesAvatars/driver.png'
-import farmer from '../../../assets/StoriesAvatars/farmer-avatar.png'
-import female from '../../../assets/StoriesAvatars/female-chef.png'
-import flight from '../../../assets/StoriesAvatars/flight-attendant.png'
-import graduated from '../../../assets/StoriesAvatars/graduated-student.png'
-import saleswoman from '../../../assets/StoriesAvatars/saleswoman.png'
+
 import Story from './Story';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -32,8 +28,9 @@ export default function ImageAvatars() {
     })
     
 
-  },[posts])
+  },[])
 
+  
 
   return (
 
@@ -42,7 +39,7 @@ export default function ImageAvatars() {
      <Swiper
       spaceBetween={50}
       slidesPerView={8}
-      onSlideChange={() => console.log('slide change')}
+
       onSwiper={(swiper) => console.log(swiper)}
     >
       {

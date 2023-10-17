@@ -21,7 +21,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  alignItems: "center", // Center everything horizontally and vertically
+  alignItems: "center", 
   bgcolor: "#1D1D1D",
   transition: "5s",
 };

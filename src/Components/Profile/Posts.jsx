@@ -39,7 +39,7 @@ export default function Posts({ setNumberOfPosts }) {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center", // Center everything horizontally and vertically
+    alignItems: "center", 
     bgcolor: "#1D1D1D",
     transition: "5s",
   };
@@ -53,7 +53,7 @@ export default function Posts({ setNumberOfPosts }) {
 
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
-    setSelectedItem(id); // Store the item.id when the menu is opened
+    setSelectedItem(id); 
     console.log(id)
   };
 
@@ -62,7 +62,7 @@ export default function Posts({ setNumberOfPosts }) {
 
   async function Delete() {
     console.log(selectedItem);
-    // You can now make your axios.delete request here
+  
 
     try {
       await axios.delete(`http://16.170.173.197/posts/${selectedItem}`, {
@@ -85,8 +85,6 @@ export default function Posts({ setNumberOfPosts }) {
     } catch (err) {
       console.log(err);
     }
-
-
 
     setAnchorEl(null);
   }
