@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useContext } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -15,10 +15,11 @@ import Modal from '../Modal/Modal'
 import img from '../../assets/WhatsApp Image 2023-10-06 at 12.46.31_5690597c.jpg'
 import axios from "axios";
 import Swal from "sweetalert2";
+import { postsContext } from "../PostsContext/PostsContext";
 
 export default function IconsSide() {
 
-
+  let {user} = useContext(postsContext); 
   const token = localStorage.getItem('token');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
@@ -196,11 +197,11 @@ function sweetAlert(){
           <Avatar
             alt="Asim sawafta"
             sx={{ marginRight: 3, width: 30, height: 30 }}
-            src={img}
+            src={user.avatar}
             w
           />
 
-          <ListItemText primary={localStorage.getItem("name")} />
+          <ListItemText primary={user.userName} />
 
         </ListItemButton>
       </Link>

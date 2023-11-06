@@ -9,7 +9,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import saleswoman from '../../../assets/StoriesAvatars/saleswoman.png'
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import { Container } from '@mui/material';
@@ -17,7 +16,7 @@ import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { postsContext } from '../../PostsContext/PostsContext';
 
-export default function RecipeReviewCard({ id, name, body, urlPhoto, likes}) {
+export default function RecipeReviewCard({ id, name, body, urlPhoto, likes ,avatar}) {
   
 let [User, setUser] = useState([])
   const token = localStorage.getItem("token")
@@ -97,7 +96,7 @@ let [User, setUser] = useState([])
 
               alignItems: "center"
             }}>
-              <Avatar alt="Remy Sharp" src={saleswoman} style={{ border: "1px solid rgb(60, 221, 255)", padding: "2px" }} />
+              <Avatar alt="Remy Sharp" src={avatar} sx={{width:45,height:45,border:"1px solid  rgb(60, 221, 255)"}}  />
               <span style={{ marginLeft: "10px" }}>{name}</span>
             </div>
           }

@@ -35,7 +35,7 @@ export default function Profile() {
         <Stack className="part1" style={{ marginTop: "30px ", marginLeft: "50px" }} spacing={2}>
 
           <Stack spacing={2} direction="row">
-            <Typography style={{ fontSize: "20px", fontWeight: "12px" }}>{user.user}</Typography>
+            <Typography style={{ fontSize: "20px", fontWeight: "12px" }}>{user.userName}</Typography>
             <Button
               sx={{ height: 30, bgcolor: "white" }}
               style={{ color: "black", borderRadius: "10px", fontSize: "12px", fontWeight: "8px" }}

@@ -11,6 +11,7 @@ const token=localStorage.getItem("token")
 const [userName,setUserName]=useState("")
 const [bio,setBio]=useState("")
 const [password,setPassword]=useState("")
+
 let {user} = useContext(postsContext); 
 let formData = new FormData()
 const [isChangingPassword, setIsChangingPassword] = useState(false);
@@ -48,7 +49,7 @@ console.log(user);
     formData.append("bio", bio);
     formData.append("userName", userName?userName:user.userName);
     formData.append("status",switchStatus );
-    formData.append("avatar", imgCovered);
+    formData.append("avatar", img?img:user.avatar);
     formData.append("password",password?password: user.password );
 
     axios.put(`http://16.170.173.197/users`, formData, {

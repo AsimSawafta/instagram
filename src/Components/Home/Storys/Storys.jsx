@@ -1,6 +1,6 @@
 
 import Stack from '@mui/material/Stack';
-import driver from '../../../assets/StoriesAvatars/driver.png'
+import img from '../../../assets/StoriesAvatars/driver.png'
 
 import Story from './Story';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -44,7 +44,7 @@ export default function ImageAvatars() {
     >
       {
         posts.map((post) =>{
-          return (<SwiperSlide><Story  photo={driver} name={post.user.userName}/></SwiperSlide>)
+          return (<SwiperSlide><Story  photo={post.user.avatar=="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png"?img:post.user.avatar} name={post.user.userName}/></SwiperSlide>)
         })
       }
       

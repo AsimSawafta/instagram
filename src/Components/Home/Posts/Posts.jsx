@@ -3,6 +3,7 @@ import Post from './Post'
 import { Container } from '@mui/material'
 import axios from 'axios'
 import Modal from '../../Modal/Modal'
+import img from '../../../assets/StoriesAvatars/driver.png'
 import { postsContext } from '../../PostsContext/PostsContext'
 export default function Posts() {
 
@@ -10,35 +11,7 @@ export default function Posts() {
 
   const { homePosts: posts, setHomePosts: setPosts } = useContext(postsContext)
 
-  let {user, setUser} = useContext(postsContext);
 
-  async function a() {
-    
-      
-    await axios
-       .get(`http://16.170.173.197/users`, {
-         headers: {
-           Authorization: `Bearer ${token}`,
-         },
-       })
-       .then((response) => {
-  
-        
-    
-        setUser( response.data.users.filter((user)=>user.id==localStorage.getItem("myID")))
-
-        console.log(user);   
-       })
-       .catch((error) => {
-         console.log(error);
-       });
-   
-  }
-  useEffect(()=>{
-
-    a()
-  
-  },[])
 
 
   function getPosts() {
@@ -63,7 +36,7 @@ export default function Posts() {
     getPosts()
   }, [])
 
-
+console.log(posts[0]);
 
   return (
     <div  >
@@ -71,7 +44,7 @@ export default function Posts() {
 
         {
 
-          posts ? [...posts].reverse().map((posts, index) => <Post key={index} id={posts.id} name={posts.user.userName} body={posts.description} urlPhoto={posts.image} likes={posts.likes}  />
+          posts ? [...posts].reverse().map((posts, index) => <Post key={index} id={posts.id} name={posts.user.userName} body={posts.description} urlPhoto={posts.image} likes={posts.likes} avatar={posts.user.avatar=="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png"?img:posts.user.avatar} />
           ) : ""
         }
         <Modal data={setPosts} />

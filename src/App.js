@@ -12,7 +12,7 @@ import Layout2 from './Components/Layout2/Layout2';
 import UpdateUser from './Components/UpdateUser/UpdateUser'
 import ProtectedRouter from './Components/ProtectedRouter/ProtectedRouter';
 import { postsContext } from './Components/PostsContext/PostsContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageNoteFound from './Components/PageNotFound/PageNoteFound';
 
 
@@ -48,7 +48,9 @@ function App() {
   ])
 
 
-
+  useEffect(() => {
+    document.title = 'Instagram';
+  }, []);
 
   return (
     <div className="App" style={{ display: "flex" }}  >

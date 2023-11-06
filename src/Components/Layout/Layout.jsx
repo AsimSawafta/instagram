@@ -8,6 +8,8 @@ import axios from 'axios';
 export default function Layout() {
   let {user, setUser} = useContext(postsContext);
   const token=localStorage.getItem("token")
+
+
   async function a() {
     
       
@@ -21,7 +23,7 @@ export default function Layout() {
   
         
     
-        setUser( response.data.users.filter((user)=>user.id==localStorage.getItem("myID")))
+        setUser( response.data.users.filter((user)=>user.id==localStorage.getItem("myID")[0]))
 
         console.log(user);   
        })
@@ -30,9 +32,28 @@ export default function Layout() {
        });
    
   }
-  useEffect(()=>{
 
-    a()
+
+
+  useEffect(()=>{
+     axios
+    .get(`http://16.170.173.197/users`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+
+     
+ 
+     setUser( response.data.users.filter((user)=>user.id==localStorage.getItem("myID"))[0])
+
+     console.log(user);   
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+   
   
   },[])
   return (
