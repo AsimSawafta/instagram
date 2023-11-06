@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect} from 'react'
 import Post from './Post'
 import { Container } from '@mui/material'
 import axios from 'axios'
@@ -10,6 +10,35 @@ export default function Posts() {
 
   const { homePosts: posts, setHomePosts: setPosts } = useContext(postsContext)
 
+  let {user, setUser} = useContext(postsContext);
+
+  async function a() {
+    
+      
+    await axios
+       .get(`http://16.170.173.197/users`, {
+         headers: {
+           Authorization: `Bearer ${token}`,
+         },
+       })
+       .then((response) => {
+  
+        
+    
+        setUser( response.data.users.filter((user)=>user.id==localStorage.getItem("myID")))
+
+        console.log(user);   
+       })
+       .catch((error) => {
+         console.log(error);
+       });
+   
+  }
+  useEffect(()=>{
+
+    a()
+  
+  },[])
 
 
   function getPosts() {

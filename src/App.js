@@ -9,7 +9,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from './Components/SignUp/SignUp';
 import SignIn from './Components/SignIn/SignIn';
 import Layout2 from './Components/Layout2/Layout2';
-
+import UpdateUser from './Components/UpdateUser/UpdateUser'
 import ProtectedRouter from './Components/ProtectedRouter/ProtectedRouter';
 import { postsContext } from './Components/PostsContext/PostsContext';
 import { useState } from 'react';
@@ -19,8 +19,7 @@ import PageNoteFound from './Components/PageNotFound/PageNoteFound';
 function App() {
   const [posts, setPosts] = useState([])
   const [homePosts, setHomePosts] = useState([])
-
-  
+  const [user,setUser] = useState("");
   const router = createBrowserRouter([
     {
       path: "",
@@ -38,9 +37,11 @@ function App() {
 
       children: [
         { index: true, element: <ProtectedRouter><Home /> </ProtectedRouter> },
-        { path: "Profile", element: <ProtectedRouter><Profile /></ProtectedRouter> },
+        { path: "Profile", element: <ProtectedRouter><Profile /></ProtectedRouter>},
         { path: "Messages", element: <ProtectedRouter><Messages /></ProtectedRouter> },
+
         { path: "Explore", element: <ProtectedRouter><Explore /></ProtectedRouter> },
+        { path: "Profile/updateUser", element: <UpdateUser /> },
         { path: "*", element: <PageNoteFound/> },
       ],
     },
@@ -51,7 +52,7 @@ function App() {
 
   return (
     <div className="App" style={{ display: "flex" }}  >
-      <postsContext.Provider value={{ posts, setPosts, homePosts, setHomePosts }}>
+      <postsContext.Provider value={{ posts, setPosts, homePosts, setHomePosts,user,setUser }}>
         <RouterProvider router={router} />
       </postsContext.Provider>
     </div>

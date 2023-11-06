@@ -8,8 +8,9 @@ import img from "../../assets/instagram-logo.png"
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { postsContext } from "../PostsContext/PostsContext";
 import * as Yup from 'yup'
 const style = {
 
@@ -47,6 +48,7 @@ const style2 = {
   })
 
 export default function MyModal() {
+  let {user,setUser} = useContext(postsContext);
   let formik = useFormik({
     initialValues: {
       
@@ -68,12 +70,14 @@ let {data}=await axios.post("http://16.170.173.197/users/login",values)
   localStorage.setItem("token",token);
   localStorage.setItem("myID",response.data.user.id)
   localStorage.setItem("name",response.data.user.userName)
+  setUser(response.data.user)
   navigate('/user')
-  
+  console.log(user)
 
 }).catch((error) =>{
   console.log(error);
   setError(error.response.data)
+  console.log(user);
 })
 
 
@@ -85,6 +89,7 @@ let {data}=await axios.post("http://16.170.173.197/users/login",values)
     console.log(data);
   }
 }
+
   return (
     <div style={{width:"100%", height:"100vh",display:"flex", flexDirection:"column", justifyContent:"center",alignItems:"center" }}>  
         <Box sx={style} style={{display:"flex", flexDirection:"column", justifyContent:"center",alignItems:"center"}} >

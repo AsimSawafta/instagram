@@ -82,13 +82,7 @@ function sweetAlert(){
 
   async function deleteAccount() {
     try {
-      const name = localStorage.getItem('name');
-  
-      if (!name) {
-        console.log('Token is missing or invalid.');
-        return;
-      }
-  
+     
       const response = await axios.delete('http://16.170.173.197/users', {
         headers: {
           Authorization: `Bearer ${token}`,

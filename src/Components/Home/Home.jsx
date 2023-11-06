@@ -4,9 +4,7 @@ import Storys from './Storys/Storys'
 import Posts from './Posts/Posts'
 import { Box,  Grid, Paper } from '@mui/material'
 import Sec2 from './Section2/Sec2'
-
 import { styled } from '@mui/material/styles';
-
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#000',
@@ -17,9 +15,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 export default function Home() {
   return (
-    
-      
-      
         <Box  sx={{bgcolor:"black" , marginLeft:"20px" , width:"100%"}}>
         <Grid container rowSpacing={0} columnSpacing={0}>
         <Grid item xs={7}>

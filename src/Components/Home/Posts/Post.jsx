@@ -69,6 +69,8 @@ let [User, setUser] = useState([])
       });
   
 }
+
+
   useEffect(() => {
     if(likes.length){
       NamesOfLikes()
@@ -110,7 +112,8 @@ let [User, setUser] = useState([])
         <CardMedia
           component="img"
           height="350"
-          width="450"
+          // width="450"
+        
           image={`${urlPhoto}`}
           alt="post photo"
           style={{ width: '450px' }}

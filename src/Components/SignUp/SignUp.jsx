@@ -64,7 +64,7 @@
 async function sendRegisterData(values){
   let {data}=await axios.post("http://16.170.173.197/users/signup",values)
   .then((response) =>{
-    const token=response.data.token
+    const token=response.data.token;
       localStorage.setItem("token",token);
       navigate('/')
 
@@ -77,9 +77,7 @@ async function sendRegisterData(values){
       console.log("welcome")
       setError("")
     }
-    // else{
-    //   // console.log(data);
-    // }
+  
 }
     
   

@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Typography from '@mui/material/Typography';
 import { Avatar, Container, Button, Stack } from "@mui/material";
-import img from "../../assets/WhatsApp Image 2023-10-06 at 12.46.31_5690597c.jpg";
+// import img from "../../assets/WhatsApp Image 2023-10-06 at 12.46.31_5690597c.jpg";
 import MyTabs from './Tabs';
 import Posts from "./Posts";
+import { Link } from "react-router-dom";
+import { postsContext } from "../PostsContext/PostsContext";
 
 
 export default function Profile() {
   const [numberOfPosts, setNumberOfPosts] = useState(0)
-  console.log(setNumberOfPosts)
+  let {user} = useContext(postsContext)
+  console.log(user);
   return (
     <Container
       maxWidth="lg" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center", }}
@@ -22,8 +25,8 @@ export default function Profile() {
           <Avatar
             alt="Asim sawafta"
             sx={{ m: 5, width: 130, height: 130, alignItems: "center", justifyContent: "center" }}
-            src={img}
-            w
+            src={user.avatar}
+            
           />
 
         </Stack>
@@ -32,12 +35,12 @@ export default function Profile() {
         <Stack className="part1" style={{ marginTop: "30px ", marginLeft: "50px" }} spacing={2}>
 
           <Stack spacing={2} direction="row">
-            <Typography style={{ fontSize: "20px", fontWeight: "12px" }}>{localStorage.getItem("name")}</Typography>
+            <Typography style={{ fontSize: "20px", fontWeight: "12px" }}>{user.user}</Typography>
             <Button
               sx={{ height: 30, bgcolor: "white" }}
               style={{ color: "black", borderRadius: "10px", fontSize: "12px", fontWeight: "8px" }}
             >
-              Edit profile
+             <Link to={"updateUser"}>Edit profile</Link> 
             </Button>
             <Button
               sx={{ height: 30, bgcolor: "white" }}
@@ -57,9 +60,8 @@ export default function Profile() {
 
 
           <Stack spacing={2} style={{ alignItems: "start", marginBottom: "20px" }}>
-            <Typography style={{ fontSize: "15px", padding: "0", margin: "0" }}>CSE || AAUP 💫</Typography>
-            <Typography style={{ fontSize: "15px", padding: "0", margin: "0" }}>قريب جداً سَتستيقظ وتَقول : هذا ليسَ فَجرًا عادِيًّا ، انه فَجرُ الجَبْر 🤍🤍"</Typography>
-            <Typography style={{ fontSize: "15px", padding: "0", margin: "0" }}>|| palestine</Typography>
+            <Typography style={{ fontSize: "15px", padding: "0", margin: "0" }}>{user.bio}</Typography>
+            
           </Stack>
         </Stack>
       </Stack>
